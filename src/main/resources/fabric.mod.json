@@ -19,6 +19,9 @@
 		"main": [
 			"mod.hc.revive_plus.HCRevive"
 		],
+		"client": [
+			"mod.hc.revive_plus.HCReviveClient"
+		],
 		"fabric-datagen": [
 			"mod.hc.revive_plus.HCReviveDataGenerator"
 		]
