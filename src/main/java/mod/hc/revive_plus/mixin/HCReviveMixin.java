@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftServer.class)
 public class HCReviveMixin {
-	@Inject(at = @At("HEAD"), method = "loadLevel")
+	@Inject(at = @At("HEAD"), method = "loadWorld")
 	private void init(CallbackInfo info) {
 		// This code is injected into the start of MinecraftServer.loadLevel()
 		HCRevive.LOGGER.info("MinecraftServer.loadLevel called");

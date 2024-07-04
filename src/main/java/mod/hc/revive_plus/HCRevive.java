@@ -5,8 +5,6 @@ import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.minecraft.util.Identifier;
-
 public class HCRevive implements ModInitializer {
 
 	public static final String MOD_ID = "hc_revive_plus";
@@ -17,5 +15,6 @@ public class HCRevive implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+
 	}
 }
