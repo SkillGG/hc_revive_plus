@@ -1,0 +1,9 @@
+HcRevive+
+
+Umierasz  - > Ciało opada na ziemie i leżysz - > Masz timer XXX sekund( pasek bossa zmniejszający się ) ( wyświetlone kordy na górze pod paskiem) możliwość pisania na czacie ale nie możesz się ruszać ani obracać
+
+- Jeżeli umrzesz to zmieniasz się w ducha ( tryb adventure ,transparent postaci jak u ducha, moby ciebie nie widzą[jak na creative]) jeżeli wejdziesz do void to umrzesz na zawsze
+
+- Jeżeli chcesz się odrodzić, przyjaciel musi na twoim trupie użyć Revive Potion [ enchanted strength potion ] ( odpowiednia receptura jest żeby ja stworzyć ) i musisz być obok ciała inaczej ( "dusza nie ma zamiaru wrócić do ciała" )
+
+- Gdy się odrodzisz masz slow 2 ; 2,5 serduszka na 30 sekund; hunger(15sek)
