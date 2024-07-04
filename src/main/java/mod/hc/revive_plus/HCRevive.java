@@ -2,13 +2,10 @@ package mod.hc.revive_plus;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.alchemy.Potion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.minecraft.util.Identifier;
 
 public class HCRevive implements ModInitializer {
 
@@ -20,6 +17,5 @@ public class HCRevive implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-
 	}
 }
