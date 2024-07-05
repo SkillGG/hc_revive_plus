@@ -1,12 +1,10 @@
 package mod.hc.revive_plus.effects;
 
 import mod.hc.revive_plus.HCRevive;
-import mod.hc.revive_plus.PlayerKnockedStatusAccessor;
+import mod.hc.revive_plus.KnockablePlayer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
 
 public class ReviveEffect extends StatusEffect {
 
@@ -21,9 +19,9 @@ public class ReviveEffect extends StatusEffect {
 
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
-        if (entity instanceof PlayerKnockedStatusAccessor) {
-            if (((PlayerKnockedStatusAccessor) entity).isKnocked())
-                ((PlayerKnockedStatusAccessor) entity).setKnocked(false, null);
+        if (entity instanceof KnockablePlayer) {
+            if (((KnockablePlayer) entity).isKnocked())
+                ((KnockablePlayer) entity).setKnocked(false, null);
             else
                 (entity).removeStatusEffect(HCRevive.REVIVE_EFFECT);
         }
