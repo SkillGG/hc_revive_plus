@@ -8,16 +8,22 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.stat.Stats;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.GameMode;
 import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -28,6 +34,15 @@ public abstract class PlayerMixin extends LivingEntity implements KnockablePlaye
 
     private boolean knocked = false;
 
+
+    // List of functions from PlayerEntity used here
+    @Shadow
+    public abstract HungerManager getHungerManager();
+    @Shadow
+    public abstract void incrementStat(Identifier stat);
+    @Shadow
+    public abstract void addExhaustion(float exhaustion);
+
     private PlayerMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -35,9 +50,6 @@ public abstract class PlayerMixin extends LivingEntity implements KnockablePlaye
     public boolean isKnocked() {
         return knocked;
     }
-
-    @Shadow
-    public abstract HungerManager getHungerManager();
 
     public void setKnocked(boolean v, ServerPlayerEntity spe) {
         knocked = v;
@@ -49,6 +61,7 @@ public abstract class PlayerMixin extends LivingEntity implements KnockablePlaye
         }
         EntityAttributeInstance walkingSpeed = getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
         if (v) {
+            // sPlayer.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, StatusEffectInstance.INFINITE));
             sPlayer.changeGameMode(GameMode.ADVENTURE);
             setHealth(1);
             HungerManager hunger = getHungerManager();
@@ -57,6 +70,7 @@ public abstract class PlayerMixin extends LivingEntity implements KnockablePlaye
                 walkingSpeed.setBaseValue(0.01f);
             }
         } else {
+            sPlayer.removeStatusEffect(StatusEffects.INVISIBILITY);
             sPlayer.changeGameMode(GameMode.SURVIVAL);
             if (walkingSpeed != null) {
                 walkingSpeed.setBaseValue(0.1f);
@@ -88,17 +102,18 @@ public abstract class PlayerMixin extends LivingEntity implements KnockablePlaye
         LOGGER.info("Recieved {} damage from {}", damageAmount, damageSource.getName());
         PlayerEntity player = (PlayerEntity) (Object) this;
         float health = player.getHealth();
-        LOGGER.info("Player would've died!");
-        ServerPlayerEntity serverPlayer = getServerPlayer();
-        GameMode curGM = serverPlayer.interactionManager.getGameMode();
         if (isKnocked()) {
             LOGGER.warn("IS KNOCKED OUT");
-            serverPlayer.changeGameMode(GameMode.SURVIVAL);
+            LOGGER.warn("Reducing damage to 0");
             return damageAmount;
         }
-        PlayerKnockedEvent.EVENT.invoker().interact(player.getWorld(), player);
-        setKnocked(true, getServerPlayer());
-        return 0f;
+        if(health - damageAmount < 0.0f){
+            PlayerKnockedEvent.EVENT.invoker().interact(player.getWorld(), player);
+            setKnocked(true, getServerPlayer());
+            return 0f;
+        }else{
+            return damageAmount;
+        }
     }
 
 }

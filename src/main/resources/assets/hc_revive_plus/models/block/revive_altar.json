@@ -1,7 +1,9 @@
 {
-  "parent": "block/cube_all",
+  "parent": "block/slab",
   "textures": {
-    "all": "hc_revive_plus:block/revive_altar"
+    "bottom": "hc_revive_plus:block/revive_pad_top",
+    "side": "hc_revive_plus:block/revive_pad_side",
+    "top": "hc_revive_plus:block/revive_pad_top"
   }
 }
 

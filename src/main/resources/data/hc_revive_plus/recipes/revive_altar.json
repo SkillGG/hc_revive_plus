@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ApA",
+    "GeG"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:golden_apple"
+    },
+    "p": {
+      "item": "minecraft:poppy"
+    },
+    "G": {
+      "item": "minecraft:raw_gold_block"
+    },
+    "e": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "result": {
+    "item": "hc_revive_plus:revive_altar",
+    "count": 1
+  }
+}
+

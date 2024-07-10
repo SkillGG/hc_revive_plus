@@ -6,7 +6,8 @@
 		"HCReviveMixin",
 		"PlayerMixin",
 		"ServerPlayerMixin",
-		"HungerMixin"
+		"HungerMixin",
+		"LivingEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

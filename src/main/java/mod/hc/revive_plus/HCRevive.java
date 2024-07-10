@@ -57,7 +57,6 @@ public class HCRevive implements ModInitializer {
         });
         PlayerKnockedEvent.EVENT.register((w, player) -> {
             MinecraftServer server = w.getServer();
-            LOGGER.info("Knocked event!");
             if (server == null) return ActionResult.PASS;
 
             PlayerData playerState = StateSaverAndLoader.getPlayerData(player);
